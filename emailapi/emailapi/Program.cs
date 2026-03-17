@@ -23,11 +23,11 @@ builder.Services.AddSingleton<OtpService>();
 var app = builder.Build();
 app.UseCors("AllowAngular");
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = "swagger"; // This ensures it stays at /swagger
+});
 
 app.UseHttpsRedirection();
 
